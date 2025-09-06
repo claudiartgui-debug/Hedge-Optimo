@@ -43,7 +43,7 @@ dict_labels ={
     'value_musd_withoutchilca2': ["Margin EEP without Chilca2 (MUSD)", 'sum']
 }
 
-st.title(f"Hedge Optimo - {fecha}")
+st.title(f"Hedge Optimo ({fecha})")
 st.markdown(f"#### Year: {year}, Scenarios: {scenario}, PPA price ($/MWh): {ppa_price}")
 df_inputs[ list(dict_labels.keys())] = df_inputs[ list(dict_labels.keys())] .round(2)
 
@@ -56,7 +56,7 @@ with col1: st.pyplot(hists [hists_keys[0]])
 with col2: st.pyplot(hists [hists_keys[1]])
 with col3: st.pyplot(hists [hists_keys[2]])
 
-st.header("Summary Inputs")
+st.subheader("Summary Inputs")
 st.subheader("Data")
 df_inputs[df_inputs.columns[5:]] = df_inputs[df_inputs.columns[5:]].round(1)
 st.dataframe(df_inputs)
@@ -68,13 +68,13 @@ df_stats[df_stats.columns[1:]] = df_stats[df_stats.columns[1:]].round(1)
 st.dataframe(df_stats)
 
 
-st.header("Scatters")
+st.subheader("Scatters")
 col4, col5 = st.columns(2)
 scatters_keys = list(scatters.keys())
 with col4: st.pyplot(scatters[scatters_keys [0]])
 with col5: st.pyplot(scatters[scatters_keys [1]])
 
-st.header("EEP + PPA Deal per capacity in MW")
+st.subheader("EEP + PPA Deal per capacity in MW")
 df_stats_capacity = stats_capacity(df_inputs, ppa_price)
 cols = [ 'capacity','At Risk@P90','Mean', 'SD', 'P5', 'P95', 'Min', 'Max', 'Downside', 'Upside', 'Spread']
 df_stats_capacity[cols[1:]] = df_stats_capacity[cols[1:]].round(1)
@@ -89,7 +89,7 @@ with col9:
     fig2 = stats_graphic(df_stats_capacity[df_stats_capacity['variable']== tittle][['capacity','At Risk@P90']],"At Risk@P90", year, tittle) 
     st.pyplot(fig2)
 
-st.header("Statistics")
+st.subheader("Statistics")
 col6, col7 = st.columns(2)
 with col6:
     st.subheader("EEP ALL assets")
@@ -102,6 +102,7 @@ with col7:
 #cd "C:\Users\ZJ6638\OneDrive - ENGIE\MC\Streamlit\JUL_Hedge_Optimo-main"
 #python -m streamlit run main_hedge_excel.py
 # 38 - 42.5  : steps = 0.25
+
 
 
 
